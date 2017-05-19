@@ -4,6 +4,7 @@ main {
 
 .carousel {
     border: solid 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 4px rgba(125, 125, 125, 0.1);
     height: 20vh;
     overflow: hidden;
     position: relative;
@@ -17,6 +18,12 @@ main {
     margin-top: 0 !important;
 }
 
+.carousel:hover .carousel-nav{
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: rgba(0, 0, 0, 0.7) 0 0 2px;
+}
+
 .carousel-item {
     border: solid 1px #333;
     height: 15vh;
@@ -26,24 +33,32 @@ main {
 }
 
 .carousel-nav {
+    background: rgba(0, 0, 0, 0.1);
+    color:rgba(255, 255, 255, 0.1);
     display: block;
     font-family: verdana,sans-serif;
-    font-size: 3em;
-    height: 14.75vh;
-    padding-top: 5.25vh;
+    height: 20vh;
+    padding-top: 7vh;
     position: absolute;
     text-align: center;
-    text-shadow:rgba(0,0,0,0.1); 0 0 2px;
+    text-shadow:rgba(0, 0, 0, 0.1) 0 0 2px;
     transition: all 0.4s;
     width: 2vw;
 }
 
+.carousel-nav:hover {
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
 .carousel-next {
+    padding-right: 2.5vw;
     right: 0;
 }
 
 .carousel-prev {
     left: 0;
+    padding-right: 2.5vw;
 }
 
 .session-card {

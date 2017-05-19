@@ -117,7 +117,33 @@ function handle_session_entries(data){
 }
 
 function handle_entry(data){
-    
+    if(data.is_new){
+        app.entries.push(data.entry);
+    }else{
+        for(let i of app.entries){
+            if(i.entry_id === data.entry.entry_id){
+                i = data.entry;
+                updateVisibleEntries(i);
+                break;
+            }
+        }
+    }
+}
+
+function updateVisibleEntries(entry){
+    let query = document.getElementById('entry-filter').value;
+    if(query.length > 0){
+        if(entry.captain.includes(query) ||
+            entry.tournament_id.toString().includes(query) ||
+            entry.entry_id.toString().includes(query)
+        ){
+            app.ui.visibleEntries.push(entry);
+        }
+    }else{
+        if(app.ui.visibleEntries.length < carousel.maxItems){
+            app.ui.visibleEntries.push(entry);
+        }
+    }
 }
 
 function insertUIEntries(entries){

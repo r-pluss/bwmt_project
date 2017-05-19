@@ -2,7 +2,9 @@
 <html>
     <head>
         <link rel= 'stylesheet' href= "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css"/>
-        <link rel= 'stylesheet' href= "./style.css">
+        <link rel= 'stylesheet' href= "./bulma_shim.css"/>
+        <link rel= 'stylesheet' href= "./font_awesome/css/font-awesome.min.css"/>
+        <link rel= 'stylesheet' href= "./style.css"/>
     </head>
     <body>
         <main id= 'app-root' tabindex= "0" v-on:keyup.esc= "keyup_esc">
@@ -77,8 +79,11 @@
                     <div class= 'columns'>
                         <div id= 'entry-carousel-filter-container' class= 'column is-4 is-offset-1'>
                             <div class= 'field'>
-                                <p class= 'control'>
+                                <p class= 'control has-icon-left has-icons-left'>
                                     <input id= 'entry-filter' type= 'search' class= 'input is-info' placeholder= 'Filter Entries'>
+                                    <span class= 'icon is-left'>
+                                        <i class= 'fa fa-search'></i>
+                                    </span>
                                 </p>
                             </div>
                         </div>
@@ -86,8 +91,16 @@
                     <div class= 'columns'>
                         <div id= 'entry-carousel-container' class= 'column is-10 is-offset-1'>
                             <div class= 'carousel'>
-                                <a href='' class='carousel-nav carousel-prev' v-on:click= "carouselNav">&laquo;</a>
-                                <a href='' class='carousel-nav carousel-next' v-on:click= "carouselNav">&raquo;</a>
+                                <div class= "carousel-nav carousel-prev" v-on:click= "carouselNav">
+                                    <span class=' icon is-large'>
+                                        <i class= 'fa fa-step-backward'></i>
+                                    </span>
+                                </div>
+                                <div class= "carousel-nav carousel-next" v-on:click= "carouselNav">
+                                    <span class='icon is-large'>
+                                        <i class= 'fa fa-step-forward'></i>
+                                    </span>
+                                </div>
                                 <ul class= 'carousel-item-list'>
                                     <template v-for='entry in ui.visibleEntries'>
                                         <li class= 'carousel-item'>{{entry.entry_id}}</li>

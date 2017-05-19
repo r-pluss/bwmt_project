@@ -1,0 +1,9 @@
+{
+    "name": "apr_electron_project",
+    "description": "tbd",
+    "version": "0.0.1",
+    "main": "./main.js",
+    "scripts": {
+        "start": "electron ."
+    }
+}

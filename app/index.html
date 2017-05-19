@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel= 'stylesheet' href= "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css"/>
+        <link rel= 'stylesheet' href= "./style.css">
+    </head>
+    <body>
+        <main id= 'app-root' tabindex= "0" v-on:keyup.esc= "keyup_esc">
+            <div class= 'content'>
+                <div id= 'session-select' v-if= '!session_selected' class= 'columns'>
+                    <div class= 'column is-one-third is-offset-one-third'>
+                        <h1 class= 'has-text-centered'>Select or Create a Session</h1>
+                        <div id= 'session-list'>
+                            <template v-for= "session in session_list">
+                                <div class= 'card session-card' v-on:click= "select_existing_session(session.session_id)">
+                                    <header class="card-header">
+                                        <p class= 'card-header-title'>
+                                            {{session.description}}
+                                        </p>
+                                    </header>
+                                    <div class='card-content'>
+                                        <p>Created: {{session.created_string}}</p>
+                                        <p>Last Modified: {{session.last_modified_string}}</p>
+                                        <p>Number of Entries: {{session.entry_count}}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class= 'box' id= 'new-session' v-on:click= "new_session_modal">
+                            <p class= 'has-text-centered'>
+                                Create New Session
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id= 'data-entry' v-else>
+                    <h1 class= 'has-text-centered'>{{header}}</h1>
+                    <div id= 'data-entry' class= 'columns'>
+                        <div class= 'column'>
+                            <h2 class= 'has-text-centered'>{{header_1}}</h2>
+                            <div class= 'field'>
+                                <p class= 'control'>
+                                    <label class="label">Name</label>
+                                    <input id= 'name' class= 'input'>
+                                </p>
+                                <p class= 'control'>
+                                    <label class="label">ID #</label>
+                                    <input id= 'id-number' class= 'input'>
+                                </p>
+                            </div>
+                        </div>
+                        <div id= "three-wall" class= 'column'>
+                            <h2 class= 'has-text-centered'>{{header_2}}</h2>
+                            <div class= 'field'>
+                                <p class= 'control'>
+                                    <label class="label">First Item</label>
+                                    <input id= 'wall-1' type= 'number' class= 'input'>
+                                </p>
+                                <p class= 'control'>
+                                    <label class="label">Second Item</label>
+                                    <input id= 'wall-2' type= 'number' class= 'input'>
+                                </p>
+                                <p class= 'control'>
+                                    <label class="label">Third Item</label>
+                                    <input id= 'wall-3' type= 'number' class= 'input'>
+                                </p>
+                            </div>
+                        </div>
+                        <div id= "big-j" class= 'column'>
+                            <h2 class= 'has-text-centered'>{{header_3}}</h2>
+                            <div class= 'field'>
+                                <label class="label">Special Item</label>
+                                <input id= 'junk-1' type= 'number' class= 'input'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class= 'columns'>
+                        <div id= 'entry-carousel-filter-container' class= 'column is-4 is-offset-1'>
+                            <div class= 'field'>
+                                <p class= 'control'>
+                                    <input id= 'entry-filter' type= 'search' class= 'input is-info' placeholder= 'Filter Entries'>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class= 'columns'>
+                        <div id= 'entry-carousel-container' class= 'column is-10 is-offset-1'>
+                            <div class= 'carousel'>
+                                <a href='' class='carousel-nav carousel-prev' v-on:click= "carouselNav">&laquo;</a>
+                                <a href='' class='carousel-nav carousel-next' v-on:click= "carouselNav">&raquo;</a>
+                                <ul class= 'carousel-item-list'>
+                                    <template v-for='entry in ui.visibleEntries'>
+                                        <li class= 'carousel-item'>{{entry.entry_id}}</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id= 'modal-container'>
+                <div id= 'new-session-modal' class= 'modal'>
+                    <div class= 'modal-background'></div>
+                    <div class= 'modal-content has-text-centered notification'>
+                        <div class= 'field'>
+                            <p class= 'control'>
+                                <label class= 'label'>Session Description</label>
+                                <input id= 'new-session-descript' class='input is-expanded'
+                                    v-model= 'new_session.descript' type='text'
+                                    placeholder= 'Write something'>
+                                <p id= 'new-session-descript-warn' class="help is-danger"></p>
+                            </p>
+                        </div>
+                        <p>
+                            <button class= 'button is-info is-outlined' v-on:click= 'create_session'>Create</button>
+                            <button class= 'button is-danger is-outlined' v-on:click= 'cancel_new_session_modal'>Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src= './db_mock.js'></script>
+        <script src="https://unpkg.com/vue"></script>
+        <script type= "text/javascript" src= "./vue_app.js"></script>
+    </body>
+</html>

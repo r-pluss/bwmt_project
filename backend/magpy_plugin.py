@@ -137,6 +137,7 @@ class TestBackEnd(cherry_bottle.WebApp):
         pass
         #need to do things like get the total weight and also set the largest
         entry['total'] = self.sum_nullable(entry['walleyes'])
+        entry['max_walleye'] = self.get_largest_walleye(entry['walleyes'])
 
     @staticmethod
     def sum_nullable(coll):
@@ -147,6 +148,18 @@ class TestBackEnd(cherry_bottle.WebApp):
             except TypeError:
                 pass
         return t
+
+
+    @staticmethod
+    def get_largest_walleye(fish):
+        b = 0
+        for f in fish:
+            try:
+                if f and f > b:
+                    b = f
+            except TypeError:
+                pass
+        return b
 
 app_root = '/bwmt/'
 app_name = 'testbackend'
